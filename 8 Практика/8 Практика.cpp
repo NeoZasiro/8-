@@ -83,16 +83,21 @@ int main()
 		myOMS.insert(iter1 + i, omsArray);
 
 	}
+	string searchLastName = "";
 
-
-	/*for (int i = 0; i < 5; i++)
+	while (searchLastName != "q" && searchLastName != "Q")
 	{
-		cout << "myOMS: " << myOMS[i]->GetPolisNumber() << endl;
-		cout << "OMSRefresh: " << OMSRefresh[i]->GetPolisNumber() << endl;
-	}*/
-	string SearchLastName = ReturnString("Введите фамилию для поиска: ");
 
-	cout << CountLastName(SearchLastName, size(myOMS)) << endl;
-
+		/*for (int i = 0; i < 5; i++)
+		{
+			cout << "myOMS: " << myOMS[i]->GetPolisNumber() << endl;
+			cout << "OMSRefresh: " << OMSRefresh[i]->GetPolisNumber() << endl;
+		}*/
+		searchLastName = ReturnString("Введите фамилию для поиска: ");
+		if (searchLastName == "q" || searchLastName == "Q")
+		{
+			cout << "Количество полюсов на заданную фамилию: " << CountLastName(searchLastName, size(myOMS)) << endl;
+		}
+	}
 
 }
