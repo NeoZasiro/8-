@@ -58,27 +58,29 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	int count = 0;
-	
+
 	string firstName[9] = { "Александр" , "Леонид" , "Сергей", "Иван", "Фёдор", "Константин", "Даниил" , "Кирилл" , "Денис" };
 	string lastName[9] = { "Кузнецов", "Иванов", "Проценко", "Соколов", "Коннов", "Проценко", "Штоколкин", "Моховиков", "Заостровцев" };
 	string validaty[9] = { "01.01.2024", "02.05.2025", "06.07.2026", "03.03.2025", "04.05.2027", "12.12.2023", "07.07.2023", "05.05.2026", "01.09.2028" };
-	
+
 	for (int i = 0; i < 1000; i++)
 	{
 		OMS* omsArray = new OMS(firstName[GetRandomNumber(0, 8)], lastName[GetRandomNumber(0, 8)], validaty[GetRandomNumber(0, 8)], "25.25.25");
 		myOMS.push_back(omsArray);
-		
+
 	}
 
 	for (int i = 999; i > -1; i--)
 	{
 		OMSRefresh.push_back(myOMS[i]);
 	}
-	
+
 	for (int i = 0; i < 500; i++)
 	{
 		OMS* omsArray = new OMS(firstName[GetRandomNumber(0, 8)], lastName[GetRandomNumber(0, 8)], validaty[GetRandomNumber(0, 8)], "25.25.25");
-		myOMS.insert(i + 500, omsArray);
+		int position = i + 500;
+		auto iter1 = myOMS.cbegin() + 500;
+		myOMS.insert(iter1 + i, omsArray);
 
 	}
 
@@ -91,6 +93,6 @@ int main()
 	string SearchLastName = ReturnString("Введите фамилию для поиска: ");
 
 	cout << CountLastName(SearchLastName, size(myOMS)) << endl;
-	
+
 
 }
