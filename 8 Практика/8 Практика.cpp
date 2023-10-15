@@ -17,6 +17,9 @@ using namespace Model;
 //Очистить вектор и убедиться, что он пуст.
 //Задание 3. Разработать меню для демонстрации работы программы.
 
+vector<OMS*> myOMS;
+vector<OMS*> OMSRefresh;
+
 int GetRandomNumber(int min, int max)
 {
 	static random_device rd;
@@ -30,19 +33,64 @@ int GetRandomNumber(int min, int max)
 	return randomValue;
 }
 
+string ReturnString(string text)
+{
+	cout << text;
+	cin >> text;
+	return text;
+}
+
+int CountLastName(string searchLastName, int numPolis)
+{
+	int count{};
+	for (int k = 0; k < numPolis; k++)
+	{
+		if (myOMS[k]->GetLastName() == searchLastName)
+		{
+			count++;
+		}
+	}
+	return count;
+}
 
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-
-	vector<OMS> myOMS;
+	int count = 0;
 	
 	string firstName[9] = { "Александр" , "Леонид" , "Сергей", "Иван", "Фёдор", "Константин", "Даниил" , "Кирилл" , "Денис" };
 	string lastName[9] = { "Кузнецов", "Иванов", "Проценко", "Соколов", "Коннов", "Проценко", "Штоколкин", "Моховиков", "Заостровцев" };
 	string validaty[9] = { "01.01.2024", "02.05.2025", "06.07.2026", "03.03.2025", "04.05.2027", "12.12.2023", "07.07.2023", "05.05.2026", "01.09.2028" };
-
-		myOMS.push_back(OMS(firstName[GetRandomNumber(0, 8)], lastName[GetRandomNumber(0, 8)], validaty[GetRandomNumber(0, 10)], "25.25.25"));
-		myOMS[0].print();
 	
+	for (int i = 0; i < 1000; i++)
+	{
+		OMS* omsArray = new OMS(firstName[GetRandomNumber(0, 8)], lastName[GetRandomNumber(0, 8)], validaty[GetRandomNumber(0, 8)], "25.25.25");
+		myOMS.push_back(omsArray);
+		
+	}
+
+	for (int i = 999; i > -1; i--)
+	{
+		OMSRefresh.push_back(myOMS[i]);
+	}
+	
+	for (int i = 0; i < 500; i++)
+	{
+		OMS* omsArray = new OMS(firstName[GetRandomNumber(0, 8)], lastName[GetRandomNumber(0, 8)], validaty[GetRandomNumber(0, 8)], "25.25.25");
+		myOMS.insert(i + 500, omsArray);
+
+	}
+
+
+	/*for (int i = 0; i < 5; i++)
+	{
+		cout << "myOMS: " << myOMS[i]->GetPolisNumber() << endl;
+		cout << "OMSRefresh: " << OMSRefresh[i]->GetPolisNumber() << endl;
+	}*/
+	string SearchLastName = ReturnString("Введите фамилию для поиска: ");
+
+	cout << CountLastName(SearchLastName, size(myOMS)) << endl;
+	
+
 }
