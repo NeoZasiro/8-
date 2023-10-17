@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Polis.h"
 using namespace std;
-
+using namespace Polis;
 namespace Model
 {
 	class OMS : private Polis
@@ -14,7 +14,7 @@ namespace Model
 		}Oms;
 	public:
 		OMS(string firstName, string lastName, string validity, string birthDate)
-			: Polis(firstName, lastName, validity), Oms{birthDate}
+			: Polis(firstName, lastName, validity), Oms{ birthDate }
 		{
 		}
 		~OMS()
